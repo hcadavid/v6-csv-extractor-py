@@ -4,11 +4,16 @@ FROM harbor2.vantage6.ai/infrastructure/algorithm-base
 # This is a placeholder that should be overloaded by invoking
 # docker build with '--build-arg PKG_NAME=...'
 ARG PKG_NAME="v6-csv-extractor-py"
+ARG INSTALL_DEV=false
 
 # install federated algorithm
-COPY . /app
+COPY ./v6-csv-extractor-py/ /app
 RUN pip install /app
 
+COPY ./vantage6 /app/vantage6
+RUN pip install /app/vantage6/vantage6
+RUN pip install /app/vantage6/vantage6-common
+RUN pip install /app/vantage6/vantage6-algorithm-tools
 
 # Set environment variable to make name of the package available within the
 # docker image.

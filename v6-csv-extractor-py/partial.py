@@ -8,9 +8,28 @@ or directly to the user (if they requested partial results).
 """
 
 import pandas as pd
-from vantage6.algorithm.tools.decorators import data
+from vantage6.algorithm.tools.decorators import data, source_database
+from vantage6.algorithm.decorator.action import (
+    data_extraction,
+    pre_processing,
+    federated,
+)
 
 
+@data_extraction
+@source_database
+def read_csv(database_uri: str) -> dict:
+    return pd.read_csv(database_uri)
+
+
+@pre_processing
 @data(1)
-def read_csv(df1: pd.DataFrame) -> dict:
-    return df1.to_dict()
+def pre_process(df1: pd.DataFrame, column, dtype) -> pd.DataFrame:
+    df1[column] = df1[column].astype(dtype)
+    return df1
+
+
+@federated
+@data(1)
+def sum(df1: pd.DataFrame, column) -> dict:
+    return {"sum": df1[column].sum()}
