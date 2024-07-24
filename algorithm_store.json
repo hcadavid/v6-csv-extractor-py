@@ -1,0 +1,19 @@
+{
+  "name": "v6-csv-extractor-py",
+  "image": "csv-extractor",
+  "vantage6_version": "4.3",
+  "partitioning": "horizontal",
+  "functions": [
+    {
+      "name": "read_csv",
+      "description": "",
+      "type": "federated",
+      "databases": [
+        {
+          "name": "Database 1"
+        }
+      ],
+      "arguments": []
+    }
+  ]
+}
