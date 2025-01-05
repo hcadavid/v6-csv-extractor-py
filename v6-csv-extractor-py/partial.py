@@ -29,7 +29,14 @@ def pre_process(df1: pd.DataFrame, column, dtype) -> pd.DataFrame:
     return df1
 
 
+@pre_processing
+@data(1)
+def pre_process2(df1: pd.DataFrame, new_column) -> pd.DataFrame:
+    df1[new_column] = df1["age"] + 10
+    return df1
+
+
 @federated
 @data(1)
 def sum(df1: pd.DataFrame, column) -> dict:
-    return {"sum": df1[column].sum()}
+    return {"sum": int(df1[column].sum())}
