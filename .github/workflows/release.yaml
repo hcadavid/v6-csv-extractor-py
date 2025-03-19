@@ -11,15 +11,20 @@ jobs:
 
         steps:
 
+        - name: Checkout Repository
+          uses: actions/checkout@v4
+
         - name: Clone vantage6 repository
           uses: actions/checkout@v4
           with:
             repository: vantage6/vantage6
             ref: release/5.0            
-        
-        - name: Checkout Repository
-          uses: actions/checkout@v4
 
+        - name: List filesystem tree
+          run: |
+            echo "=== Filesystem Tree After Cloning ==="
+            tree -L 2 .
+        
         - name: Login to Docker registry
           uses: docker/login-action@v3
           with:
