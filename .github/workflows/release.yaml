@@ -10,6 +10,14 @@ jobs:
         runs-on: ubuntu-latest
 
         steps:
+
+        - name: Clone vantage6 repository
+          uses: actions/checkout@v4
+          with:
+            repository: vantage6/vantage6
+            ref: release/5.0
+            path: vantage6
+        
         - name: Checkout Repository
           uses: actions/checkout@v4
 
@@ -20,8 +28,8 @@ jobs:
             password: ${{ secrets.DOCKER_PASSWORD }}
 
         - name: Run Makefile Rule
-          run: docker build -t csv-extractor .
-
+          run: docker build -t hcadavidescience/v6-sessions-diagnostics .
+          
         - name: Push Docker image
           run: |
-            docker push csv-extractor
+            docker push hcadavidescience/v6-sessions-diagnostics
