@@ -17,7 +17,7 @@ COPY ./ /app
 RUN ls /app
 RUN pip install /app
 
-COPY ./v6-csv-extractor-py/vantage6/ /app/vantage6
+COPY ./vantage6/ /app/vantage6
 RUN pip install /app/vantage6/vantage6-common
 RUN pip install /app/vantage6/vantage6-client
 RUN pip install /app/vantage6/vantage6
