@@ -6,6 +6,12 @@ FROM harbor2.vantage6.ai/infrastructure/algorithm-base
 ARG PKG_NAME="v6-csv-extractor-py"
 ARG INSTALL_DEV=false
 
+# Install tree command
+RUN apt-get update && apt-get install -y tree
+
+# Run tree to inspect directory structure
+RUN tree  # Shows top-level directory structure
+
 # install federated algorithm
 COPY ./ /app
 RUN ls /app
@@ -24,3 +30,8 @@ ENV PKG_NAME=${PKG_NAME}
 # Tell docker to execute `wrap_algorithm()` when the image is run. This function
 # will ensure that the algorithm method is called properly.
 CMD python -c "from vantage6.algorithm.tools.wrap import wrap_algorithm; wrap_algorithm()"
+
+
+
+
+
